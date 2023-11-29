@@ -4,6 +4,7 @@ import org.proje.jdbc.model.Ders;
 import org.proje.jdbc.model.DersKoduTumBilgiler;
 import org.proje.jdbc.model.Ogrenci;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -20,6 +21,23 @@ public class DersDAO extends DAO{
         ders.setDersKodu(resultSet.getString("ders_kodu"));
         ders.setDersAdi(resultSet.getString("ders_adı"));
         return ders;
+    }
+
+    public void addDers(Ders theDers) throws Exception{
+
+        Statement statement = null;
+        ResultSet resultSet = null;
+/*
+        try {
+            statement = super.con.createStatement();
+            resultSet = statement.executeQuery("insert into ders" + " (ders_kodu, ders_adı)" + " values (?, ?)");
+
+            resultSet.set
+        }
+
+ */
+
+
     }
 
     private DersKoduTumBilgiler rowToDersTumBilgiler(ResultSet resultSet) throws Exception{

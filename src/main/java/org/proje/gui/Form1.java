@@ -6,8 +6,7 @@ import org.proje.jdbc.model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.List;
 
 public class Form1 extends JFrame {
@@ -49,6 +48,7 @@ public class Form1 extends JFrame {
     private JTextField GiderAtt;
     private JTextField StokAtt;
     private JTable table1;
+    private JButton dersEkleButton;
 
     public void closeAllBut(int i) {
         switch (i) {
@@ -109,6 +109,7 @@ public class Form1 extends JFrame {
         StudentAtt.setVisible(false);
         button3.setVisible(false);
         studentLabel.setVisible(false);
+        dersEkleButton.setVisible(false);
     }
 
     public void kapatGiderBilgisi() {
@@ -168,6 +169,7 @@ public class Form1 extends JFrame {
         dersAtt.setVisible(false);
         giderAtt.setVisible(false);
         stokAtt.setVisible(false);
+        dersEkleButton.setVisible(false);
         //persAttButton.setVisible(false);
         //stuAttButton.setVisible(false);
         //dersAttButton.setVisible(false);
@@ -443,6 +445,7 @@ public class Form1 extends JFrame {
                     }
                 });
 
+                dersEkleButton.setVisible(!dersEkleButton.isVisible());
                 button3.setVisible(!button3.isVisible());
                 DersAtt.setVisible(!DersAtt.isVisible());
                 dersLabel.setVisible(!dersLabel.isVisible());
@@ -457,6 +460,22 @@ public class Form1 extends JFrame {
                 } catch (Exception e1) {
                     JOptionPane.showMessageDialog(Form1.this, "Error:" + e1, "Error", JOptionPane.ERROR_MESSAGE);
                 }
+
+                dersEkleButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                        DersDAO dersDAO = null;
+                        try {
+                            dersDAO = new DersDAO();
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        AddDers dialog = new AddDers(Form1.this, dersDAO);
+                        dialog.setVisible(true);
+
+                    }
+                });
 
                 button3.addActionListener(new ActionListener() {
                     @Override
@@ -720,7 +739,6 @@ public class Form1 extends JFrame {
             }
         });
 
-
         this.add(panel1);
         this.setVisible(true);
 
@@ -741,310 +759,103 @@ public class Form1 extends JFrame {
     private void $$$setupUI$$$() {
         createUIComponents();
         panel1 = new JPanel();
-        panel1.setLayout(new GridBagLayout());
+        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(21, 6, new Insets(0, 0, 0, 0), -1, -1));
         stuAtt = new JLabel();
         stuAtt.setText("Aradığınız Öğrenci Özelliğini Seçin:");
-        GridBagConstraints gbc;
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 5;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(stuAtt, gbc);
+        panel1.add(stuAtt, new com.intellij.uiDesigner.core.GridConstraints(5, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(65, 16), null, 0, false));
         dersAtt = new JLabel();
         dersAtt.setText("Aradığınız Ders Özelliğini Seçin:");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 9;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(dersAtt, gbc);
+        panel1.add(dersAtt, new com.intellij.uiDesigner.core.GridConstraints(9, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(65, 16), null, 0, false));
         giderAtt = new JLabel();
         giderAtt.setText("Aradığınız Gider Özelliğini Seçin:");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 13;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(giderAtt, gbc);
+        panel1.add(giderAtt, new com.intellij.uiDesigner.core.GridConstraints(13, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(65, 16), null, 0, false));
         stuCombo = new JComboBox();
         final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
         stuCombo.setModel(defaultComboBoxModel1);
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 5;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(stuCombo, gbc);
+        panel1.add(stuCombo, new com.intellij.uiDesigner.core.GridConstraints(5, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(83, 30), null, 0, false));
         dersCombo = new JComboBox();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 9;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(dersCombo, gbc);
+        panel1.add(dersCombo, new com.intellij.uiDesigner.core.GridConstraints(9, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(83, 30), null, 0, false));
         giderCombo = new JComboBox();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 13;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(giderCombo, gbc);
+        panel1.add(giderCombo, new com.intellij.uiDesigner.core.GridConstraints(13, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(83, 30), null, 0, false));
         stokCombo = new JComboBox();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 17;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(stokCombo, gbc);
+        panel1.add(stokCombo, new com.intellij.uiDesigner.core.GridConstraints(17, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(83, 30), null, 0, false));
         stokAtt = new JLabel();
         stokAtt.setText("Aradığınız Stok Özelliğini Seçin:");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 17;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(stokAtt, gbc);
+        panel1.add(stokAtt, new com.intellij.uiDesigner.core.GridConstraints(17, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(65, 16), null, 0, false));
         gelenBilgiLabel.setHorizontalAlignment(10);
         gelenBilgiLabel.setText("");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 5;
-        gbc.gridy = 1;
-        gbc.gridheight = 2;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        panel1.add(gelenBilgiLabel, gbc);
+        panel1.add(gelenBilgiLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 5, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(237, 16), null, 0, false));
         persAtt = new JLabel();
         persAtt.setHorizontalAlignment(10);
         persAtt.setText("Aradığınız Personel Özelliğini Seçin:");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 1;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(persAtt, gbc);
+        panel1.add(persAtt, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(65, 16), null, 0, false));
         persCombo = new JComboBox();
         final DefaultComboBoxModel defaultComboBoxModel2 = new DefaultComboBoxModel();
         persCombo.setModel(defaultComboBoxModel2);
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 1;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(persCombo, gbc);
+        panel1.add(persCombo, new com.intellij.uiDesigner.core.GridConstraints(1, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(83, 30), null, 0, false));
         studentLabel = new JLabel();
         studentLabel.setText("Öğrenci Numarasını Giriniz:");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 6;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(studentLabel, gbc);
+        panel1.add(studentLabel, new com.intellij.uiDesigner.core.GridConstraints(6, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(65, 16), null, 0, false));
         StudentAtt = new JTextField();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 6;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel1.add(StudentAtt, gbc);
+        panel1.add(StudentAtt, new com.intellij.uiDesigner.core.GridConstraints(6, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), new Dimension(221, 30), new Dimension(200, -1), 0, false));
         dersLabel = new JLabel();
         dersLabel.setText("Ders Kodunu Giriniz:");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 10;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(dersLabel, gbc);
+        panel1.add(dersLabel, new com.intellij.uiDesigner.core.GridConstraints(10, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(65, 16), null, 0, false));
         DersAtt = new JTextField();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 10;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel1.add(DersAtt, gbc);
+        panel1.add(DersAtt, new com.intellij.uiDesigner.core.GridConstraints(10, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), new Dimension(221, 30), new Dimension(200, -1), 0, false));
         öğrenciBilgisiButton = new JButton();
         öğrenciBilgisiButton.setText("Öğrenci Bilgisi");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        gbc.gridheight = 3;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(öğrenciBilgisiButton, gbc);
+        panel1.add(öğrenciBilgisiButton, new com.intellij.uiDesigner.core.GridConstraints(5, 0, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), new Dimension(200, 30), new Dimension(200, -1), 0, false));
         dersBilgisiButton = new JButton();
         dersBilgisiButton.setText("Ders Bilgisi");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 9;
-        gbc.gridheight = 3;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(dersBilgisiButton, gbc);
+        panel1.add(dersBilgisiButton, new com.intellij.uiDesigner.core.GridConstraints(9, 0, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), new Dimension(200, 30), new Dimension(200, -1), 0, false));
         giderLabel = new JLabel();
         giderLabel.setText("Gider Numarasını Giriniz:");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 14;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(giderLabel, gbc);
+        panel1.add(giderLabel, new com.intellij.uiDesigner.core.GridConstraints(14, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(65, 16), null, 0, false));
         GiderAtt = new JTextField();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 14;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel1.add(GiderAtt, gbc);
+        panel1.add(GiderAtt, new com.intellij.uiDesigner.core.GridConstraints(14, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), new Dimension(221, 30), new Dimension(200, -1), 0, false));
         button4 = new JButton();
         button4.setText("Seç");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 15;
-        gbc.gridwidth = 2;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        panel1.add(button4, gbc);
+        panel1.add(button4, new com.intellij.uiDesigner.core.GridConstraints(15, 2, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, -1), new Dimension(100, -1), new Dimension(100, -1), 0, false));
         stokLabel = new JLabel();
         stokLabel.setText("Stok Numarasını Giriniz:");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 18;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(stokLabel, gbc);
+        panel1.add(stokLabel, new com.intellij.uiDesigner.core.GridConstraints(18, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(65, 16), null, 0, false));
         StokAtt = new JTextField();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 18;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel1.add(StokAtt, gbc);
+        panel1.add(StokAtt, new com.intellij.uiDesigner.core.GridConstraints(18, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), new Dimension(221, 30), new Dimension(200, -1), 0, false));
         button5 = new JButton();
         button5.setText("Seç");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 19;
-        gbc.gridwidth = 2;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        panel1.add(button5, gbc);
+        panel1.add(button5, new com.intellij.uiDesigner.core.GridConstraints(19, 2, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, -1), new Dimension(100, -1), new Dimension(100, -1), 0, false));
         giderBilgisiButton = new JButton();
         giderBilgisiButton.setText("Gider Bilgisi");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 13;
-        gbc.gridheight = 3;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(giderBilgisiButton, gbc);
+        panel1.add(giderBilgisiButton, new com.intellij.uiDesigner.core.GridConstraints(13, 0, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), new Dimension(200, 30), new Dimension(200, -1), 0, false));
         stokBilgisiButton = new JButton();
         stokBilgisiButton.setText("Stok Bilgisi");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 17;
-        gbc.gridheight = 3;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(stokBilgisiButton, gbc);
+        panel1.add(stokBilgisiButton, new com.intellij.uiDesigner.core.GridConstraints(17, 0, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), new Dimension(200, 30), new Dimension(200, -1), 0, false));
         personelLabel = new JLabel();
         personelLabel.setText("Personel Numarasını Giriniz:");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 2;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(personelLabel, gbc);
+        panel1.add(personelLabel, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(65, 16), null, 0, false));
         PersonelAtt = new JTextField();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 2;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel1.add(PersonelAtt, gbc);
+        panel1.add(PersonelAtt, new com.intellij.uiDesigner.core.GridConstraints(2, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), new Dimension(221, 30), new Dimension(200, -1), 0, false));
         button1 = new JButton();
         button1.setText("Seç");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 3;
-        gbc.gridwidth = 2;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        panel1.add(button1, gbc);
+        panel1.add(button1, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, -1), new Dimension(100, -1), new Dimension(100, -1), 0, false));
         personelBilgisiButton = new JButton();
         personelBilgisiButton.setHideActionText(false);
         personelBilgisiButton.setText("Personel Bilgisi");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridheight = 3;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel1.add(personelBilgisiButton, gbc);
+        panel1.add(personelBilgisiButton, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(200, -1), new Dimension(200, 30), new Dimension(200, -1), 0, false));
         final JScrollPane scrollPane1 = new JScrollPane();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 5;
-        gbc.gridy = 3;
-        gbc.gridheight = 18;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
-        panel1.add(scrollPane1, gbc);
+        panel1.add(scrollPane1, new com.intellij.uiDesigner.core.GridConstraints(3, 5, 18, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         table1 = new JTable();
         scrollPane1.setViewportView(table1);
         button2 = new JButton();
         button2.setText("Seç");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 7;
-        gbc.gridwidth = 2;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        panel1.add(button2, gbc);
+        panel1.add(button2, new com.intellij.uiDesigner.core.GridConstraints(7, 2, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, -1), new Dimension(100, -1), new Dimension(100, -1), 0, false));
+        dersEkleButton = new JButton();
+        dersEkleButton.setText("Ders Ekle");
+        panel1.add(dersEkleButton, new com.intellij.uiDesigner.core.GridConstraints(11, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         button3 = new JButton();
         button3.setText("Seç");
-        gbc = new GridBagConstraints();
-        gbc.gridx = 2;
-        gbc.gridy = 11;
-        gbc.gridwidth = 2;
-        gbc.weightx = 1.0;
-        gbc.weighty = 1.0;
-        panel1.add(button3, gbc);
-        final JPanel spacer1 = new JPanel();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 4;
-        gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        panel1.add(spacer1, gbc);
+        panel1.add(button3, new com.intellij.uiDesigner.core.GridConstraints(11, 3, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(100, -1), new Dimension(100, -1), new Dimension(100, -1), 0, false));
     }
 
     /**
@@ -1054,4 +865,141 @@ public class Form1 extends JFrame {
         return panel1;
     }
 
+    public void refreshDersView() {
+    }
+
+    public static class AddDers extends JDialog {
+        private JPanel contentPane;
+        private JButton buttonOK;
+        private JButton buttonCancel;
+        private JTextField DersAdiText;
+        private JTextField DersKoduText;
+        private JLabel dersAdiLabel;
+        private JLabel dersKoduLabel;
+        private DersDAO dersDAO;
+        private Form1 form1;
+
+        public AddDers(Form1 theform1, DersDAO thedersDAO) {
+            this();
+            form1 = theform1;
+            dersDAO = thedersDAO;
+        }
+
+        public AddDers() {
+            setContentPane(contentPane);
+            setModal(true);
+            getRootPane().setDefaultButton(buttonOK);
+
+            buttonOK.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    saveDers();
+                }
+            });
+
+            buttonCancel.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    onCancel();
+                }
+            });
+
+            // call onCancel() when cross is clicked
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    onCancel();
+                }
+            });
+
+            // call onCancel() on ESCAPE
+            contentPane.registerKeyboardAction(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    onCancel();
+                }
+            }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        }
+
+        protected void saveDers() {
+            String dersAdi = DersKoduText.getText();
+            String dersKodu = DersAdiText.getText();
+
+            Ders tempDers = new Ders(dersKodu, dersAdi);
+
+            try {
+                dersDAO.addDers(tempDers);
+
+                setVisible(false);
+                dispose();
+
+                form1.refreshDersView();
+
+            } catch (Exception e1) {
+                JOptionPane.showMessageDialog(form1, "Error:" + e1, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        private void onCancel() {
+            dispose();
+        }
+
+        public static void main(String[] args) {
+            AddDers dialog = new AddDers();
+            dialog.pack();
+            dialog.setVisible(true);
+            System.exit(0);
+        }
+
+
+        {
+// GUI initializer generated by IntelliJ IDEA GUI Designer
+// >>> IMPORTANT!! <<<
+// DO NOT EDIT OR ADD ANY CODE HERE!
+            $$$setupUI$$$();
+        }
+
+        /**
+         * Method generated by IntelliJ IDEA GUI Designer
+         * >>> IMPORTANT!! <<<
+         * DO NOT edit this method OR call it in your code!
+         *
+         * @noinspection ALL
+         */
+        private void $$$setupUI$$$() {
+            contentPane = new JPanel();
+            contentPane.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(10, 10, 10, 10), -1, -1));
+            final JPanel panel1 = new JPanel();
+            panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+            contentPane.add(panel1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, 1, null, null, null, 0, false));
+            final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
+            panel1.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+            final JPanel panel2 = new JPanel();
+            panel2.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1, true, false));
+            panel1.add(panel2, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+            buttonOK = new JButton();
+            buttonOK.setText("Ekle");
+            panel2.add(buttonOK, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+            buttonCancel = new JButton();
+            buttonCancel.setText("İptal");
+            panel2.add(buttonCancel, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+            final JPanel panel3 = new JPanel();
+            panel3.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+            contentPane.add(panel3, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+            dersAdiLabel = new JLabel();
+            dersAdiLabel.setText("Ders Kodu");
+            panel3.add(dersAdiLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+            DersAdiText = new JTextField();
+            panel3.add(DersAdiText, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+            dersKoduLabel = new JLabel();
+            dersKoduLabel.setText("Ders Adı");
+            panel3.add(dersKoduLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+            DersKoduText = new JTextField();
+            panel3.add(DersKoduText, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        }
+
+        /**
+         * @noinspection ALL
+         */
+        public JComponent $$$getRootComponent$$$() {
+            return contentPane;
+        }
+    }
 }
