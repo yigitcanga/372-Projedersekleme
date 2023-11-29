@@ -25,18 +25,19 @@ public class DersDAO extends DAO{
 
     public void addDers(Ders theDers) throws Exception{
 
-        Statement statement = null;
-        ResultSet resultSet = null;
-/*
+        PreparedStatement statement = null;
+
         try {
-            statement = super.con.createStatement();
-            resultSet = statement.executeQuery("insert into ders" + " (ders_kodu, ders_adı)" + " values (?, ?)");
+            statement = super.con.prepareStatement("insert into ders" + " (ders_kodu, ders_adı)" + " values (?, ?)");
 
-            resultSet.set
+            statement.setString(1, theDers.getDersKodu());
+            statement.setString(2, theDers.getDersAdi());
+
+            statement.executeUpdate();
         }
-
- */
-
+        catch (Exception e){
+            throw new Exception(e);
+        }
 
     }
 
