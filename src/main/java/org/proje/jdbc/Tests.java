@@ -3,9 +3,8 @@ package org.proje.jdbc;
 import org.proje.jdbc.dao.AcilanDersDAO;
 import org.proje.jdbc.dao.DersDAO;
 import org.proje.jdbc.dao.OgrenciDAO;
-import org.proje.jdbc.model.AcilanDers;
-import org.proje.jdbc.model.Ders;
-import org.proje.jdbc.model.Ogrenci;
+import org.proje.jdbc.dao.StokDAO;
+import org.proje.jdbc.model.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +14,12 @@ public class Tests {
 
 
         try {
-            OgrenciDAO odao = new OgrenciDAO();
+            StokDAO sdao = new StokDAO();
+            List<StokWithErr> list11 =sdao.getAllStokWithErr();
+            for (StokWithErr ders : list11) {
+                System.out.println(ders);
+            }
+            /*OgrenciDAO odao = new OgrenciDAO();
             List< Ogrenci > list =odao.getAllOgrenci();
             for (Ogrenci ogrenci : list) {
                 System.out.println(ogrenci);
@@ -23,7 +27,7 @@ public class Tests {
             List<Ogrenci> search = odao.searchForOgrenci("okul_no", "500");
             for (Ogrenci ogrenci : search) {
                 System.out.println(ogrenci);
-            }
+            }*/
 
             AcilanDersDAO acilanDersDAO = new AcilanDersDAO();
             List<AcilanDers> list1 = acilanDersDAO.getAllAcilanDers();
